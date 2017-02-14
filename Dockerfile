@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     libsane-hpaio \
     dbus \
     avahi-utils \
+    supervisor \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -18,11 +19,12 @@ RUN adduser saned scanner \
     && adduser saned lp \
     && chown saned:lp /etc/sane.d/saned.conf /etc/sane.d/dll.conf
 
-COPY run.sh /run.sh
+COPY configure.sh /configure.sh
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-USER saned
+CMD supervisord -c /etc/supervisor/conf.d/supervisord.conf
 
-CMD ["/run.sh"]
+EXPOSE 6566 10000 10001
 
 # Make sure, that the device node e.g. /dev/usb/00x/ have group id 7 (lp) and group read access.
 # Environment variable:
