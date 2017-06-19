@@ -1,5 +1,5 @@
 FROM ubuntu:17.04
-MAINTAINER Jan De Luyck <jan@kcore.org>
+MAINTAINER Sebastian Schneider <mail@sesc.eu>
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y locales
