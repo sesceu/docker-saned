@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ ! -d /var/log/saned ]; then
+  mkdir /var/log/saned
+fi
+
+exec chpst svlogd -tt /var/log/saned

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ ! -d /var/log/dbus ]; then
+  mkdir /var/log/dbus
+fi
+
+exec chpst svlogd -tt /var/log/dbus
