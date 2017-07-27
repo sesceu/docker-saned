@@ -1,0 +1,14 @@
+#!/bin/sh
+exec 2>&1
+
+# create the dbus run folder if it's not present
+if [ ! -d "/var/run/dbus" ]; then
+  mkdir -p /var/run/dbus
+fi
+
+# remove the pid file from the previous run (if it exists)
+if [ -e "/var/run/dbus/pid" ]; then
+  rm /var/run/dbus/pid
+fi
+
+exec dbus-daemon --system --nofork
